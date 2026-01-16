@@ -1,131 +1,185 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Tab Grouper 設定</title>
     <style>
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 20px;
-            background: #f8fafc;
-            color: #1e293b;
-        }
-        h1 { color: #2563eb; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
-        .section {
-            background: white;
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-            margin-bottom: 24px;
-        }
-        h2 { font-size: 1.25rem; margin-top: 0; }
-        .setting-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
-        }
-        .exclusion-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 12px;
-        }
-        .exclusion-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 12px;
-            background: #f1f5f9;
-            border-radius: 6px;
-            margin-bottom: 8px;
-        }
-        .btn-remove {
-            color: #ef4444;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .input-group {
-            display: flex;
-            gap: 8px;
-        }
-        input[type="text"] {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-        }
-        .btn-add {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-        .description {
-            font-size: 14px;
-            color: #64748b;
-            margin-bottom: 20px;
-        }
+      body {
+        font-family: "Noto Sans JP", sans-serif;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #f8fafc;
+        color: #1e293b;
+      }
+      h1 {
+        color: #2563eb;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 10px;
+      }
+      .section {
+        background: white;
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin-bottom: 24px;
+      }
+      h2 {
+        font-size: 1.25rem;
+        margin-top: 0;
+      }
+      .setting-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+      .exclusion-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 12px;
+      }
+      .exclusion-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px;
+        background: #f1f5f9;
+        border-radius: 6px;
+        margin-bottom: 8px;
+      }
+      .btn-remove {
+        color: #ef4444;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .input-group {
+        display: flex;
+        gap: 8px;
+      }
+      input[type="text"] {
+        flex: 1;
+        padding: 8px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+      }
+      .btn-add {
+        background: #2563eb;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .description {
+        font-size: 14px;
+        color: #64748b;
+        margin-bottom: 20px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Tab Grouper 設定</h1>
 
     <div class="section">
-        <h2>機能設定</h2>
-        <div class="setting-item">
-            <label for="autoCollapse">アクティブでないグループを自動で折りたたむ</label>
-            <input type="checkbox" id="autoCollapse">
-        </div>
-        <div class="setting-item">
-            <label for="removeDuplicates">重複したURLのタブを自動で閉じる</label>
-            <input type="checkbox" id="removeDuplicates">
-        </div>
+      <h2>機能設定</h2>
+      <div class="setting-item">
+        <label for="autoCollapse"
+          >アクティブでないグループを自動で折りたたむ</label
+        >
+        <input type="checkbox" id="autoCollapse" />
+      </div>
+      <div class="setting-item">
+        <label for="removeDuplicates">重複したURLのタブを自動で閉じる</label>
+        <input type="checkbox" id="removeDuplicates" />
+      </div>
     </div>
 
     <div class="section">
-        <h2>カスタムグループルール</h2>
-        <p class="description">特定のURLパターンに一致した場合に、指定した名前と色でグループ化します。</p>
-        <div class="rule-form">
-            <div class="input-group" style="margin-bottom: 8px;">
-                <input type="text" id="rulePattern" placeholder="URLパターン (例: github.com/google)">
-                <input type="text" id="ruleName" placeholder="グループ名" style="max-width: 120px;">
-            </div>
-            <div class="input-group">
-                <select id="ruleColor" style="padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1;">
-                    <option value="grey">グレー</option>
-                    <option value="blue">ブルー</option>
-                    <option value="red">レッド</option>
-                    <option value="yellow">イエロー</option>
-                    <option value="green">グリーン</option>
-                    <option value="pink">ピンク</option>
-                    <option value="purple">パープル</option>
-                    <option value="cyan">シアン</option>
-                    <option value="orange">オレンジ</option>
-                </select>
-                <button id="addRule" class="btn-add">ルールを追加</button>
-            </div>
+      <h2>カスタムグループルール</h2>
+      <p class="description">
+        特定のURLパターンに一致した場合に、指定した名前と色でグループ化します。
+      </p>
+      <div class="rule-form">
+        <div class="input-group" style="margin-bottom: 8px">
+          <input
+            type="text"
+            id="rulePattern"
+            placeholder="URLパターン (例: github.com/google)"
+          />
+          <input
+            type="text"
+            id="ruleName"
+            placeholder="グループ名"
+            style="max-width: 120px"
+          />
         </div>
-        <ul id="ruleList" class="exclusion-list" style="margin-top: 20px;">
-            <!-- カスタムルールがここに追加されます -->
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>除外ドメイン</h2>
-        <p class="description">ここに登録されたドメインのタブは、自動グループ化の対象になりません。</p>
         <div class="input-group">
-            <input type="text" id="domainInput" placeholder="example.com">
-            <button id="addDomain" class="btn-add">追加</button>
+          <select
+            id="ruleColor"
+            style="padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1"
+          >
+            <option value="grey">グレー</option>
+            <option value="blue">ブルー</option>
+            <option value="red">レッド</option>
+            <option value="yellow">イエロー</option>
+            <option value="green">グリーン</option>
+            <option value="pink">ピンク</option>
+            <option value="purple">パープル</option>
+            <option value="cyan">シアン</option>
+            <option value="orange">オレンジ</option>
+          </select>
+          <button id="addRule" class="btn-add">ルールを追加</button>
         </div>
-        <ul id="exclusionList" class="exclusion-list">
-            <!-- リストアイテムがここに追加されます. -->
-        </ul>
+      </div>
+      <ul id="ruleList" class="exclusion-list" style="margin-top: 20px">
+        <!-- カスタムルールがここに追加されます -->
+      </ul>
+      <div
+        class="input-group"
+        style="
+          margin-top: 16px;
+          border-top: 1px solid #e2e8f0;
+          padding-top: 16px;
+        "
+      >
+        <button
+          id="exportRules"
+          class="btn-add"
+          style="background-color: #0ea5e9"
+        >
+          ルールをエクスポート
+        </button>
+        <button
+          id="importRules"
+          class="btn-add"
+          style="background-color: #10b981"
+        >
+          ルールをインポート
+        </button>
+        <input
+          type="file"
+          id="importFile"
+          accept=".json"
+          style="display: none"
+        />
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>除外ドメイン</h2>
+      <p class="description">
+        ここに登録されたドメインのタブは、自動グループ化の対象になりません。
+      </p>
+      <div class="input-group">
+        <input type="text" id="domainInput" placeholder="example.com" />
+        <button id="addDomain" class="btn-add">追加</button>
+      </div>
+      <ul id="exclusionList" class="exclusion-list">
+        <!-- リストアイテムがここに追加されます. -->
+      </ul>
     </div>
 
     <script src="options.js"></script>
-</body>
+  </body>
 </html>
