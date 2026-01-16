@@ -53,28 +53,40 @@
         cursor: pointer;
         font-size: 14px;
       }
-      .input-group {
-        display: flex;
-        gap: 8px;
+      .drag-handle {
+        cursor: grab;
+        margin-right: 12px;
+        color: #94a3b8;
+        font-size: 20px;
+        line-height: 1;
+        user-select: none;
       }
-      input[type="text"] {
-        flex: 1;
-        padding: 8px 12px;
-        border: 1px solid #cbd5e1;
-        border-radius: 6px;
+      .drag-handle:active {
+        cursor: grabbing;
       }
-      .btn-add {
-        background: #2563eb;
+      .exclusion-item.dragging {
+        opacity: 0.5;
+        background: #e2e8f0;
+        border: 2px dashed #94a3b8;
+      }
+      .btn-edit-rule {
+        color: #3b82f6; 
+        cursor: pointer; 
+        font-size: 14px; 
+        margin-right: 12px;
+      }
+      .btn-cancel {
+        background: #64748b;
         color: white;
         border: none;
         padding: 8px 16px;
         border-radius: 6px;
         cursor: pointer;
+        display: none;
       }
-      .description {
-        font-size: 14px;
-        color: #64748b;
-        margin-bottom: 20px;
+      .input-group {
+        display: flex;
+        gap: 8px;
       }
     </style>
   </head>
@@ -99,6 +111,7 @@
       <h2>カスタムグループルール</h2>
       <p class="description">
         特定のURLパターンに一致した場合に、指定した名前と色でグループ化します。
+        <br>左側のつまみをドラッグして順番を並び替えることができます。
       </p>
       <div class="rule-form">
         <div class="input-group" style="margin-bottom: 8px">
@@ -130,6 +143,7 @@
             <option value="orange">オレンジ</option>
           </select>
           <button id="addRule" class="btn-add">ルールを追加</button>
+          <button id="cancelEdit" class="btn-cancel">キャンセル</button>
         </div>
       </div>
       <ul id="ruleList" class="exclusion-list" style="margin-top: 20px">
