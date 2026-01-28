@@ -38,7 +38,7 @@ _※現在準備中_
 1. このリポジトリをクローンまたはダウンロードします
 
 ```bash
-git clone https://github.com/yourusername/Tab-Grouping.git
+git clone https://github.com/shgn-tn8/Tab-Grouping.git
 ```
 
 2. Chromeで `chrome://extensions/` を開きます
@@ -141,7 +141,7 @@ Tab-Grouping/
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/yourusername/Tab-Grouping.git
+git clone https://github.com/shgn-tn8/Tab-Grouping.git
 cd Tab-Grouping
 
 # Chrome拡張機能として読み込み
@@ -164,13 +164,9 @@ cd Tab-Grouping
 4. ブランチにプッシュ (`git push origin feature/amazing-feature`)
 5. プルリクエストを作成
 
-## ライセンス
-
-MIT License
-
 ## 作者
 
-[@池上将樹](https://github.com/yourusername)
+[@SHoGun](https://github.com/shgn-tn8)
 
 ## 更新履歴
 
@@ -186,7 +182,7 @@ MIT License
 
 ## サポート
 
-問題が発生した場合は、[Issues](https://github.com/yourusername/Tab-Grouping/issues)で報告してください。
+問題が発生した場合は、[Issues](https://github.com/shgn-tn8/Tab-Grouping/issues)で報告してください。
 
 ---
 

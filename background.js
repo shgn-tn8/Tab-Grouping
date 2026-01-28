@@ -214,7 +214,6 @@ async function groupTab(tab) {
     }
   } catch (err) {
     // 競合状態やタブドラッグ中のエラー("Tabs cannot be edited right now")などを全面的に無視する
-    // console.log("GroupTab error:", err); 
   }
 }
 
