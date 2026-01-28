@@ -1,0 +1,15 @@
+# Distribution folder
+dist/
+
+# Node modules (if using build tools in the future)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
