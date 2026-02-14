@@ -9,6 +9,7 @@ const DEFAULT_SETTINGS = {
   excludedDomains: [],
   autoCollapse: false,
   removeDuplicates: false,
+  sortAlphabetically: false,
   customRules: [],
 };
 
@@ -234,14 +235,63 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 /**
+ * タブをアルファベット順（グループ名 -> タブタイトル）に並べ替える
+ */
+async function sortTabs(windowId) {
+  if (!cachedSettings || !cachedSettings.sortAlphabetically) return;
+
+  try {
+    const tabs = await chrome.tabs.query({ windowId });
+    const groups = await chrome.tabGroups.query({ windowId });
+    const groupMap = new Map(groups.map(g => [g.id, g]));
+
+    // 並べ替えロジック
+    // 1. グループ名を優先 (グループなしは末尾)
+    // 2. グループ内ではタブタイトル
+    const sortedTabs = [...tabs].sort((a, b) => {
+      const groupA = groupMap.get(a.groupId);
+      const groupB = groupMap.get(b.groupId);
+      const titleA = (groupA?.title || "ー").toLowerCase(); // グループなしを後ろにするための工夫
+      const titleB = (groupB?.title || "ー").toLowerCase();
+
+      if (titleA < titleB) return -1;
+      if (titleA > titleB) return 1;
+
+      // 同じグループ内、または両方グループなしの場合、タブタイトルで比較
+      const tabTitleA = (a.title || "").toLowerCase();
+      const tabTitleB = (b.title || "").toLowerCase();
+      if (tabTitleA < tabTitleB) return -1;
+      if (tabTitleA > tabTitleB) return 1;
+      return 0;
+    });
+
+    // タブを移動
+    for (let i = 0; i < sortedTabs.length; i++) {
+        try {
+            await chrome.tabs.move(sortedTabs[i].id, { index: i });
+        } catch (e) {
+            // タブが移動できない（ドラッグ中など）場合はスキップ
+        }
+    }
+  } catch (err) {
+    console.error("Sort tabs error:", err);
+  }
+}
+
+/**
  * 全てのタブを現在の設定に基づいて再整理する
  */
 async function organizeAllTabs() {
   if (!cachedSettings) await updateCache();
   const windows = await chrome.windows.getAll({ populate: true });
   for (const win of windows) {
+    // まず各タブをグループ化
     for (const tab of win.tabs) {
       await groupTab(tab);
+    }
+    // 設定が有効な場合は並べ替え
+    if (cachedSettings.sortAlphabetically) {
+        await sortTabs(win.id);
     }
   }
 }
